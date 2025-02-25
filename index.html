@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Combined Search and Dropdown Menu</title>
+    <title>Expanding Search with Dropdown Menu</title>
     <style>
         body {
             margin: 0;
@@ -21,11 +21,17 @@
         .content-container {
             width: 100%;
             max-width: 600px;
+            transition: max-width 0.3s ease;
         }
         .search-container {
             position: relative;
             width: 250px;
             margin: 0 auto;
+            transition: width 0.3s ease;
+        }
+        .search-container.expanded {
+            width: 90vw; /* 90% of viewport width */
+            max-width: 800px;
         }
         .search-bar input {
             padding: 10px;
@@ -34,6 +40,7 @@
             border: none;
             border-radius: 5px;
             box-sizing: border-box;
+            transition: all 0.3s ease;
         }
         .dropdown {
             position: absolute;
@@ -48,6 +55,7 @@
             margin-top: 2px;
             /* Hidden by default */
             display: none;
+            transition: width 0.3s ease;
         }
         .dropdown a {
             color: #870000;
@@ -73,12 +81,15 @@
                 width: 80%;
                 max-width: 250px;
             }
+            .search-container.expanded {
+                width: 95vw;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="content-container">
-        <div class="search-container">
+    <div class="content-container" id="content-container">
+        <div class="search-container" id="search-container">
             <div class="search-bar">
                 <form action="https://www.google.com/search" method="GET">
                     <input type="text" id="search-input" name="q" placeholder="Search...">
@@ -99,16 +110,20 @@
     <script>
         // Get references to the elements
         const searchInput = document.getElementById('search-input');
+        const searchContainer = document.getElementById('search-container');
+        const contentContainer = document.getElementById('content-container');
         const dropdown = document.getElementById('dropdown');
 
-        // Show dropdown when search input is focused
+        // Show dropdown and expand search when search input is focused
         searchInput.addEventListener('focus', function() {
+            searchContainer.classList.add('expanded');
             dropdown.style.display = 'block';
         });
 
-        // Hide dropdown when clicking outside
+        // Hide dropdown and contract search when clicking outside
         document.addEventListener('click', function(event) {
             if (!searchInput.contains(event.target) && !dropdown.contains(event.target)) {
+                searchContainer.classList.remove('expanded');
                 dropdown.style.display = 'none';
             }
         });
