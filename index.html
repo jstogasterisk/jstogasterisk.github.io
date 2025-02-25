@@ -11,16 +11,27 @@
             background: url('https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/newtab-wallpapers-v2/bd424c86-6366-4f2b-b8dc-74d21439c1fb.avif') no-repeat center center/cover;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+        }
+        .search-bar {
+            margin-bottom: 20px;
+        }
+        .search-bar input {
+            padding: 10px;
+            font-size: 16px;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
         .menu-container {
             position: relative;
         }
         .menu-button {
-            background-color: #F9E4BC;
-            color: maroon;
+            background-color: #333;
+            color: white;
             padding: 10px 20px;
             border: none;
             cursor: pointer;
@@ -30,7 +41,7 @@
         .dropdown {
             display: none;
             position: absolute;
-            background-color: #F9E4BC;
+            background-color: #333;
             min-width: 160px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
@@ -44,20 +55,28 @@
             display: block;
         }
         .dropdown a:hover {
-            background-color: #F9E4BC;
+            background-color: #555;
         }
         .menu-container:hover .dropdown {
             display: block;
         }
     </style>
+    <script>
+        window.onload = function() {
+            document.getElementById('search-input').focus();
+        };
+    </script>
 </head>
 <body>
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="Search...">
+    </div>
     <div class="menu-container">
-        <button class="menu-button">Bookmarks</button>
+        <button class="menu-button">Menu</button>
         <div class="dropdown">
-            <a href="https://www.pelicansreport.com" >Pelicans Report</a>
-            <a href="https://www.github.com" >GitHub</a>
-            <a href="https://www.wikipedia.org" >Wikipedia</a>
+            <a href="https://247sports.com/college/southern-mississippi/">Golden Eagle Pride</a>
+            <a href="https://pelicansreport.com/">Pelicans Report</a>
+            <a href="https://boards.sportslogos.net/">SportsLogos.net</a>
         </div>
     </div>
 </body>
