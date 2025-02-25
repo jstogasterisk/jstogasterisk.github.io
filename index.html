@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Search with Auto-Expand</title>
+    <title>Smart Search with Dropdown Menu</title>
     <style>
         body {
             margin: 0;
@@ -161,21 +161,6 @@
         // Prevent dropdown from closing when clicking inside it
         dropdown.addEventListener('click', function(event) {
             event.stopPropagation();
-        });
-
-        // Auto-expand search and show dropdown when page loads
-        window.addEventListener('load', function() {
-            // Wait a short moment for visual effect
-            setTimeout(function() {
-                // Expand the search
-                searchContainer.classList.add('expanded');
-                
-                // Show the dropdown
-                dropdown.style.display = 'block';
-                
-                // Focus the search input
-                searchInput.focus();
-            }, 300); // Small delay for visual effect
         });
     </script>
 </body>
