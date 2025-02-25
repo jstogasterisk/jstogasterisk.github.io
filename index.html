@@ -8,13 +8,23 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: url('https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/newtab-wallpapers-v2/bd424c86-6366-4f2b-b8dc-74d21439c1fb.avif') repeat-y center center/cover;
-            height: 100vh;
+            /* Changed background to repeat in both directions and fixed attachment */
+            background: url('https://firefox-settings-attachments.cdn.mozilla.net/main-workspace/newtab-wallpapers-v2/bd424c86-6366-4f2b-b8dc-74d21439c1fb.avif') repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            /* Changed from justify-content: center to flex-start with padding-top */
+            justify-content: flex-start;
             align-items: center;
             text-align: center;
+        }
+        .content-container {
+            /* Added a container for the content with padding */
+            padding-top: 50px;
+            width: 100%;
+            max-width: 600px;
         }
         .search-bar {
             margin-bottom: 20px;
@@ -46,7 +56,7 @@
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
             border-radius: 5px;
             overflow: hidden;
-            z-index: 0;
+            z-index: 1; /* Increased z-index from 0 to 1 */
         }
         .dropdown a {
             color: #870000;
@@ -60,23 +70,35 @@
         .menu-container:hover .dropdown {
             display: block;
         }
+        /* Added media query for better mobile experience */
+        @media (max-width: 768px) {
+            .content-container {
+                padding-top: 30px;
+            }
+            .search-bar input {
+                width: 80%;
+                max-width: 250px;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="search-bar">
-        <form action="https://www.google.com/search" method="GET">
-            <input type="text" id="search-input" name="q" placeholder="Search...">
-        </form>
-    </div>
-    <div class="menu-container">
-        <button class="menu-button">Favorites</button>
-        <div class="dropdown">
-            <a href="https://247sports.com/college/southern-mississippi/">Golden Eagle Pride</a>
-            <a href="https://pelicansreport.com/">Pelicans Report</a>
-            <a href="https://boards.sportslogos.net/">SportsLogos.net</a>
-            <a href="https://csnbbs.com">CSNBBS</a>
-            <a href="https://southernmiss.rivals.com">Big Gold Nation</a>
-            <a href="https://www.tapatalk.com/groups/privateer_island/uno-sports-main-board-f4/">Privateer Island</a>
+    <div class="content-container">
+        <div class="search-bar">
+            <form action="https://www.google.com/search" method="GET">
+                <input type="text" id="search-input" name="q" placeholder="Search...">
+            </form>
+        </div>
+        <div class="menu-container">
+            <button class="menu-button">Favorites</button>
+            <div class="dropdown">
+                <a href="https://247sports.com/college/southern-mississippi/">Golden Eagle Pride</a>
+                <a href="https://pelicansreport.com/">Pelicans Report</a>
+                <a href="https://boards.sportslogos.net/">SportsLogos.net</a>
+                <a href="https://csnbbs.com">CSNBBS</a>
+                <a href="https://southernmiss.rivals.com">Big Gold Nation</a>
+                <a href="https://www.tapatalk.com/groups/privateer_island/uno-sports-main-board-f4/">Privateer Island</a>
+            </div>
         </div>
     </div>
 </body>
