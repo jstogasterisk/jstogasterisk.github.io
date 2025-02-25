@@ -1,3 +1,112 @@
-Hello, World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sometype+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sometype Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 75vh;
+            background-color: #000;
+            color: #00ff00;
+            text-transform: lowercase;
+        }
+        .container {
+            text-align: left;
+            padding: 20px;
+            border: 0.5px solid #00ff00;
+            width: 500px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        h2 {
+            grid-column: span 2;
+            margin-bottom: 20px;
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .link-button {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: #00ff00;
+            background: none;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            white-space: nowrap;
+            visibility: hidden; /* Keep links hidden initially */
+        }
+        .arrow {
+            visibility: hidden;
+            animation: blink 1s steps(2, start) infinite;
+        }
+        .link-button:hover .arrow {
+            visibility: visible;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="typewriter">
+        <h2 id="typewriter-text">where will you watch?</h2>
+        <a class="link-button" href="https://www.netflix.com/login" target="_self"><span class="arrow">> </span>netflix</a>
+        <a class="link-button" href="https://auth.max.com/login" target="_self"><span class="arrow">> </span>max</a>
+        <a class="link-button" href="https://www.hulu.com/login" target="_self"><span class="arrow">> </span>hulu</a>
+        <a class="link-button" href="https://www.disneyplus.com/login" target="_self"><span class="arrow">> </span>disney+</a>
+        <a class="link-button" href="https://www.paramountplus.com/account/signin/" target="_self"><span class="arrow">> </span>paramount+</a>
+        <a class="link-button" href="https://www.peacocktv.com/start" target="_self"><span class="arrow">> </span>peacock</a>
+        <a class="link-button" href="https://www.amazon.com/gp/video/storefront?ref_=nav_cs_prime_video" target="_self"><span class="arrow">> </span>prime video</a>
+        <a class="link-button" href="https://tv.apple.com/login" target="_self"><span class="arrow">> </span>apple tv+</a>
+        <a class="link-button" href="https://www.espn.com/watch/" target="_self"><span class="arrow">> </span>espn+</a>
+        <a class="link-button" href="https://watch.pelicans.com/" target="_self"><span class="arrow">> </span>pelicans+</a>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const textElement = document.getElementById('typewriter-text');
+            const links = document.querySelectorAll('.link-button');
+            const text = textElement.textContent;
+            textElement.textContent = '';
+            let i = 0;
+            const speed = 75; // Typing speed for h2
 
-It's a startpage.
+            // Typewriter effect for h2
+            function typeWriter() {
+                if (i < text.length) {
+                    textElement.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                } else {
+                    showLinks(); // Show all links after typewriter effect finishes
+                }
+            }
+
+            // Show links one by one in sequence
+            function showLinks() {
+                links.forEach((link, index) => {
+                    setTimeout(() => {
+                        link.style.visibility = 'visible'; // Make each link visible with a delay
+                    }, index * 100); // Stagger the appearance (200ms between each)
+                });
+            }
+
+            typeWriter();
+        });
+    </script>
+</body>
+</html>
+</body>
+</html>
