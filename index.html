@@ -63,15 +63,18 @@
     </style>
     <script>
         window.onload = function() {
-            var searchInput = document.getElementById('search-input');
-            searchInput.focus();
+            setTimeout(function() {
+                var searchInput = document.getElementById('search-input');
+                searchInput.focus();
+                searchInput.select();
+            }, 500); // Short delay to trigger keyboard on mobile
         };
     </script>
 </head>
 <body>
     <div class="search-bar">
         <form action="https://www.google.com/search" method="GET">
-            <input type="text" id="search-input" name="q" placeholder="Search..." autofocus>
+            <input type="text" id="search-input" name="q" placeholder="Search Google..." autofocus>
         </form>
     </div>
     <div class="menu-container">
@@ -84,3 +87,4 @@
     </div>
 </body>
 </html>
+
