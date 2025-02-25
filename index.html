@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expanding Search with Dropdown Menu</title>
+    <title>Smart Search with Dropdown Menu</title>
     <style>
         body {
             margin: 0;
@@ -91,8 +91,8 @@
     <div class="content-container" id="content-container">
         <div class="search-container" id="search-container">
             <div class="search-bar">
-                <form action="https://www.google.com/search" method="GET">
-                    <input type="text" id="search-input" name="q" placeholder="Search...">
+                <form id="search-form" onsubmit="return handleSearch(event)">
+                    <input type="text" id="search-input" name="q" placeholder="Search or enter website...">
                 </form>
             </div>
             <div class="dropdown" id="dropdown">
@@ -111,8 +111,38 @@
         // Get references to the elements
         const searchInput = document.getElementById('search-input');
         const searchContainer = document.getElementById('search-container');
+        const searchForm = document.getElementById('search-form');
         const contentContainer = document.getElementById('content-container');
         const dropdown = document.getElementById('dropdown');
+
+        // Smart search handler
+        function handleSearch(event) {
+            event.preventDefault();
+            
+            const query = searchInput.value.trim();
+            
+            if (!query) return false;
+            
+            // URL pattern detection
+            const urlPattern = /^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/;
+            
+            if (urlPattern.test(query)) {
+                // Handle as URL
+                let url = query;
+                
+                // Add https:// if no protocol specified
+                if (!query.startsWith('http://') && !query.startsWith('https://')) {
+                    url = 'https://' + query;
+                }
+                
+                window.location.href = url;
+            } else {
+                // Handle as search query
+                window.location.href = 'https://www.google.com/search?q=' + encodeURIComponent(query);
+            }
+            
+            return false;
+        }
 
         // Show dropdown and expand search when search input is focused
         searchInput.addEventListener('focus', function() {
